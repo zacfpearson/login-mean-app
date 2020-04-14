@@ -1,0 +1,69 @@
+
+<ng-container *ngIf="!loggedIn(); else loggedinBlock;">
+  <mat-card class="example-card">
+    <mat-card-title color="primary" style="font-weight:600;">Sign-Up</mat-card-title>
+    <button style="margin:0 auto;width:100%;" mat-icon-button (click)="newUser()" color="{{isNewUser ? 'warn' : 'primary'}}">
+      <mat-icon>{{isNewUser ? 'unfold_less' : 'unfold_more'}}</mat-icon>
+    </button>
+    <ng-container *ngIf="isNewUser">
+      <mat-card-content>
+        <p class="warn-color" *ngIf="signUpError">Error signing up. Please try again</p>
+        <mat-form-field class="input-full-width">
+          <mat-label>First Name</mat-label>
+          <input matInput type="text" placeholder="First Name" name="firstName" [(ngModel)]="firstName" required>
+        </mat-form-field>
+        <mat-form-field class="input-full-width">
+          <mat-label>Last Name</mat-label>
+          <input matInput type="text" placeholder="Last Name" name="lastName" [(ngModel)]="lastName" required>
+        </mat-form-field>
+        <br>
+        <mat-form-field class="input-full-width">
+          <mat-label>Email</mat-label>
+          <input matInput type="text" placeholder="Email" name="email" [(ngModel)]="email" required>
+        </mat-form-field>
+        <mat-form-field class="input-full-width">
+          <mat-label>Password</mat-label>
+          <input matInput type="password" placeholder="Password" name="password" [(ngModel)]="password" required>
+        </mat-form-field>
+        <button style="margin:0 auto;width:100%;" color="primary" mat-raised-button (click)="onSignupSubmit()">Create</button>
+      </mat-card-content>
+    </ng-container>
+  </mat-card>
+  
+  <mat-card class="example-card">
+    <mat-card-title color="primary" style="font-weight:600;">Sign-In</mat-card-title>
+    <button style="margin:0 auto;width:100%;" mat-icon-button (click)="newUser()" color="{{!isNewUser ? 'warn' : 'primary'}}">
+      <mat-icon>{{!isNewUser ? 'unfold_less' : 'unfold_more'}}</mat-icon>
+    </button>
+    <ng-container *ngIf="!isNewUser">
+      <mat-card-content>
+        <p class="warn-color" *ngIf="signInError">Error signing in. Please try again</p>
+        <mat-form-field class="input-full-width">
+          <mat-label>Email</mat-label>
+          <input matInput type="text" placeholder="Email" name="email" [(ngModel)]="email" required>
+        </mat-form-field>
+        <mat-form-field class="input-full-width">
+          <mat-label>Password</mat-label>
+          <input matInput type="password" placeholder="Password" name="password" [(ngModel)]="password" required>
+        </mat-form-field>
+        <button style="margin:0 auto;width:100%;" color="primary" mat-raised-button (click)="onSigninSubmit()">Sign In</button>
+      </mat-card-content>
+    </ng-container>
+  </mat-card>
+</ng-container>
+
+<ng-template #loggedinBlock>
+  <mat-card class="example-card">
+    <mat-card-title color="primary" style="font-weight:600;">Logout</mat-card-title>
+    <mat-card-content>
+      <button style="margin:0 auto;width:100%;" color="primary" mat-raised-button (click)="onLogout()">Logout</button>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card class="example-card">
+    <mat-card-title color="primary" style="font-weight:600;">Delete User</mat-card-title>
+    <mat-card-content>
+      <button style="margin:0 auto;width:100%;" color="warn" mat-raised-button (click)="deleteUserByEmail()">Delete</button>
+    </mat-card-content>
+  </mat-card>
+</ng-template>
