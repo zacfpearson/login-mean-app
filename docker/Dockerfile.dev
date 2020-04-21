@@ -1,0 +1,17 @@
+FROM node:lts-stretch-slim
+
+COPY package*.json /login-app/
+
+WORKDIR /login-app
+
+RUN apt update -y && \
+    npm install -g @angular/cli && \
+    npm install 
+
+COPY . /login-app
+
+RUN ng build
+
+EXPOSE 3000
+
+CMD ["node", "server.js"]

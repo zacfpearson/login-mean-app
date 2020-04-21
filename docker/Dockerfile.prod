@@ -1,0 +1,12 @@
+FROM node:12-alpine as builder
+COPY . /login-app
+WORKDIR /login-app
+RUN npm install -g @angular/cli && \
+    npm install && \
+    ng build 
+
+FROM node:12-alpine as app
+COPY --from=builder /login-app /login-app
+WORKDIR /login-app
+EXPOSE 3000
+CMD ["node", "server.js"]
